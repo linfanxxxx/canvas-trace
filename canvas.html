@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .ccc{
+            background-color: #e4e4e4;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+        .ddd{
+            /*background-color: antiquewhite;*/
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+        .eee{
+            /*background-color: antiquewhite;*/
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+    </style>
+</head>
+<body>
+<div style="position: relative">
+    <canvas class="ccc" id="ccc" width="1000" height="1000"></canvas>
+    <!--<canvas class="ddd" id="ddd"></canvas>-->
+    <!--<canvas class="ddd" id="eee"></canvas>-->
+</div>
+<script type="text/javascript">
+
+    function Shape(x,y) {
+        this.x = x || 50
+        this.y = y || 50
+        this.speed = 1
+        this.dir = "x"
+        // this.show = function (ctx) {
+        //     ctx.beginPath()
+        //     ctx.arc(this.x,this.y,20,0,2*Math.PI)
+        //     ctx.fill()
+        //     ctx.fillStyle = "#cc7653"
+        //     ctx.stroke()
+        // }
+    }
+    Shape.prototype.show = function (ctx) {
+        ctx.beginPath()
+        ctx.arc(this.x,this.y,3,0,2*Math.PI)
+        // ctx.strokeStyle = "white"
+        ctx.strokeStyle = "#FAEBD7"
+        ctx.fillStyle = "#FAEBD7"
+        ctx.fill()
+        ctx.stroke()
+    }
+
+    var canvas = document.getElementById("ccc")
+    var ctx = canvas.getContext("2d")
+    var lentgh = 10
+    var balls = []
+
+    function init() {
+        for (var i = 0 ; i < lentgh ; i++){
+            balls.push(new Shape(130+i*10-1,130))
+            // console.log(balls[i])
+            balls[i].show(ctx)
+        }
+        // var ball = new Shape()
+        // ball.x = 30
+        // ball.y = 30
+        // ball.show(ctx)
+    }
+
+    init()
+
+    function move() {
+        // window.requestAnimationFrame(move,canvas)
+        ctx.clearRect(0,0,1000,1000)
+        balls.forEach(function (ball,index) {
+            if (ball.x === 330 && ball.y === 130){
+                ball.dir = "y"
+                ball.speed = 1
+            }else if (ball.x === 330 && ball.y === 330){
+                ball.dir = "x"
+                ball.speed = -1
+            }else if (ball.x === 130 && ball.y === 330){
+                ball.dir = "y"
+                ball.speed = -1
+            }else if (ball.x === 130 && ball.y === 130){
+                ball.dir = "x"
+                ball.speed = 1
+                // console.log("1")
+            }
+            // console.log(index+":"+"x="+ball.x+"/y="+ball.y)
+            ball[ball.dir] += ball.speed
+            ball.show(ctx)
+        })
+        // ball.x += speed
+        // ball.show(ctx)
+    }
+
+    setInterval(move,10)
+
+
+    // c.beginPath()
+    // c.moveTo(100,20)
+    // c.lineTo(200,20)
+    // c.lineWidth= 2
+    // c.strokeStyle = "#cc7653"
+    // c.stroke()
+    // c.closePath()
+    //
+    // c.beginPath()
+    // c.moveTo(200,20)
+    // c.lineTo(200,120)
+    //
+    // c.moveTo(200,120)
+    // c.lineTo(100,120)
+    //
+    // c.moveTo(100,120)
+    // c.lineTo(100,20)
+    // c.strokeStyle = "#66CCCC"
+    // c.lineWidth = 2
+    // c.stroke()
+    // c.closePath()
+
+    // var canvas2 = document.getElementById("ddd")
+    // var d = canvas2.getContext("2d")
+    // // d.moveTo(90,10)
+    // // d.lineTo(210,10)
+    // d.strokeStyle = "#99CC99"
+    // // d.stroke()
+    // dx = 140
+    // d.moveTo(90,10)
+    // d.lineTo(dx,10)
+    // d.stroke()
+    // // d.moveTo()
+    // setInterval(function () {
+    //     d.moveTo(dx,10)
+    //     d.lineTo(dx+1,10)
+    //     d.stroke()
+    //     console.log(dx)
+    //     dx = dx + 1
+    // },10)
+    //
+    // var canvas3 = document.getElementById("eee")
+    // var e = canvas3.getContext("2d")
+    //
+    // e.strokeStyle = "#ffffff"
+    // e.lineWidth= 3
+    //
+    // var ex = 90
+    //
+    // setInterval(function () {
+    //     e.moveTo(ex,10)
+    //     e.lineTo(ex+1,10)
+    //     e.stroke()
+    //     console.log(dx-ex+"e")
+    //     ex = ex + 1
+    // },10)
+
+
+</script>
+</body>
+</html>
